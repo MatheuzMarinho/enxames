@@ -9,7 +9,7 @@ step_volitive_init = 0.01
 step_volitive_final = 0.0001
 w_scale = iteration / 2.0
 min_w = 1
-function = 'rastrigin' #rastrigin ackley rosenbrock esfera
+function = 'rosenbrock' #rastrigin ackley rosenbrock esfera
 dir_name = 'atividade-2'
 
 results = []
@@ -24,7 +24,8 @@ import os
 fig, ax = plt.subplots()
 ax.set_title(f'FSS - {function}')
 ax.boxplot(results)
-path = "boxplot"
+path = os.path.dirname(os.path.abspath(__file__))
+path += "/boxplot"
 if not os.path.exists(path):
     os.mkdir(path)
 path = path+'/'+dir_name
