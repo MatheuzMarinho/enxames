@@ -131,25 +131,25 @@ class PSO:
       return (w_max- w_min)*((self.qtd_iteracoes - iteracao_atual)/self.qtd_iteracoes)+w_min
 
   def curva_convergencia_ind(self,lista_valores_gbest,fitness_gbest,INERCIA,dir_name):
-      fig = plt.figure()
+      fig, ax = plt.subplots()
       plt.plot(lista_valores_gbest)
       fit = round(fitness_gbest,2)
       plt.title(f"Curva de Convergencia PSO {self.TOPOLOGIA}-{INERCIA} Fitness: {fit}")
       plt.xlabel("Iterações")
       plt.ylabel("Melhor Fitness")
-      #plt.tight_layout()
-      #plt.show()
+      ax.yaxis.get_major_formatter().set_scientific(False)
+      plt.tight_layout()
       print('Valor gbest:',fitness_gbest)
       import os
-      # define the name of the directory to be created
-      path = "resultados"
+      path = os.path.dirname(os.path.abspath(__file__))
+      path += "/resultados"
       if not os.path.exists(path):
           os.mkdir(path)
       path = path+'/'+dir_name
       if not os.path.exists(path):
         os.mkdir(path)
       name_figure = f"PSO {self.TOPOLOGIA}-{INERCIA}"
-      plt.savefig(path+'/'+name_figure+'.png')
+      plt.savefig(path+'/'+name_figure+'.png', bbox_inches='tight')
       plt.clf() 
 
   def curva_convergencia_geral(self,list_resultados_inercias,dir_name):

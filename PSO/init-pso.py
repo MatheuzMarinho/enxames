@@ -13,20 +13,24 @@ def multiplas_rodadas():
         bests_clerc.append(result[0][-1])
         bests_const.append(result[1][-1])
         bests_linear.append(result[2][-1])
+    bests = [bests_clerc,bests_const,bests_linear]
     import matplotlib.pyplot as plt
-    fig, ax = plt.subplots()
-    ax.set_title(f'PSO {TOPOLOGIA}-{funcao}')
-    ax.boxplot([bests_clerc,bests_const,bests_linear])
-    ax.set_xticklabels(INERCIAS)
-    path = "boxplot"
-    if not os.path.exists(path):
-        os.mkdir(path)
-    path = path+'/'+dir_name
-    if not os.path.exists(path):
-        os.mkdir(path)
-    name_figure = f"PSO {TOPOLOGIA}-{funcao}"
-    plt.savefig(path+'/'+name_figure+'.png')
-    #plt.show()
+    for i in range(len(INERCIAS)):
+        fig, ax = plt.subplots()
+        ax.set_title(f'PSO {TOPOLOGIA}-{funcao}-{INERCIAS[i]}')
+        ax.boxplot(bests[i])
+        ax.yaxis.get_major_formatter().set_scientific(False)
+        plt.tight_layout()
+        path = os.path.dirname(os.path.abspath(__file__))
+        path += "/boxplot"
+        if not os.path.exists(path):
+            os.mkdir(path)
+        path = path+'/'+dir_name
+        if not os.path.exists(path):
+            os.mkdir(path)
+        name_figure = f"PSO {TOPOLOGIA}-{funcao}-{INERCIAS[i]}"
+        plt.savefig(path+'/'+name_figure+'.png')
+        #plt.show()
 
 def unica_rodada():
     p = pso.PSO(c1,c2,velocidade_max,dimensao,numero_particulas,qtd_iteracoes,TOPOLOGIA,INERCIAS,funcao)
@@ -38,7 +42,7 @@ c2 = 2.05
 velocidade_max=[-6,6]
 dimensao = 30
 numero_particulas = 30
-qtd_iteracoes = 1000
+qtd_iteracoes = 10000
 swarm = []
 TOPOLOGIA = 'GLOBAL'  #LOCAL #GLOBAL
 INERCIAS = ['CLERC', 'CONSTANTE', 'LINEAR']
