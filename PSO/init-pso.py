@@ -1,5 +1,6 @@
 import pso
 import os
+import pandas as pd
 def multiplas_rodadas():
     results = []
     for i in range(1,31):
@@ -14,8 +15,11 @@ def multiplas_rodadas():
         bests_const.append(result[1][-1])
         bests_linear.append(result[2][-1])
     bests = [bests_clerc,bests_const,bests_linear]
+    df = pd.DataFrame()
     import matplotlib.pyplot as plt
     for i in range(len(INERCIAS)):
+        bests[i].sort()
+        df[INERCIAS[i]] = bests[i]
         fig, ax = plt.subplots()
         ax.set_title(f'PSO {TOPOLOGIA}-{funcao}-{INERCIAS[i]}')
         ax.boxplot(bests[i])
@@ -31,6 +35,9 @@ def multiplas_rodadas():
         name_figure = f"PSO {TOPOLOGIA}-{funcao}-{INERCIAS[i]}"
         plt.savefig(path+'/'+name_figure+'.png')
         #plt.show()
+    name_figure = f"PSO {TOPOLOGIA}-{funcao}.csv"
+    df.to_csv(path+'/'+name_figure,index=False)
+
 
 def unica_rodada():
     p = pso.PSO(c1,c2,velocidade_max,dimensao,numero_particulas,qtd_iteracoes,TOPOLOGIA,INERCIAS,funcao)

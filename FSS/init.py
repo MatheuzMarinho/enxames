@@ -9,7 +9,7 @@ step_volitive_init = 0.01
 step_volitive_final = 0.0001
 w_scale = iteration / 2.0
 min_w = 1
-function = 'rosenbrock' #rastrigin ackley rosenbrock esfera
+function = 'rastrigin' #rastrigin ackley rosenbrock esfera
 dir_name = 'atividade-2'
 
 results = []
@@ -34,3 +34,9 @@ if not os.path.exists(path):
 name_figure = f"FSS -{function}"
 plt.savefig(path+'/'+name_figure+'.png')
 #plt.show()
+import pandas as pd
+df = pd.DataFrame()
+results.sort()
+df[function]= results
+df.to_csv(path+'/'+name_figure+'.csv',index=False)
+
