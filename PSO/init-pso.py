@@ -51,10 +51,10 @@ dimensao = 30
 numero_particulas = 30
 qtd_iteracoes = 10000
 swarm = []
-TOPOLOGIA = 'GLOBAL'  #LOCAL #GLOBAL
+TOPOLOGIA = 'LOCAL'  #LOCAL #GLOBAL
 INERCIAS = ['CLERC', 'CONSTANTE', 'LINEAR']
 dir_name = 'atividade_2'
-funcao = 'rosenbrock' #rastrigin ackley rosenbrock esfera
+funcao = 'rastrigin' #rastrigin ackley rosenbrock esfera
 
 #unica_rodada()
 multiplas_rodadas()
