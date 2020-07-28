@@ -3,9 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
-
-
-
 def funcao_fitness(lista_solucao,funcao):
   if funcao=='ackley':
     return ackley(lista_solucao)
