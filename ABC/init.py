@@ -27,12 +27,14 @@ def analysis():
             os.mkdir(path)
         name_figure = f'ABC {movimentacao}-{funcao}'
         plt.savefig(path+'/'+name_figure+'.png')
+
         plt.subplots()
         plt.plot(np.mean(tracks, axis=0))
         plt.title(f"Curva de Convergencia ABC {funcao}\n{movimentacao}")
         plt.xlabel("Iterações")
         plt.ylabel("Melhor Fitness")
-        name_figure = f'ABC Convergencia {movimentacao}-{funcao}'
+        name_figure = f'ABC {movimentacao}-{funcao}'
+        path += "/convergencia"
         plt.savefig(path+'/'+name_figure+'.png')
         
 
