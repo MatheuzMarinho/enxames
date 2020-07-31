@@ -7,7 +7,7 @@ def analysis():
         print('MOVIMENTACAO',movimentacao)
         results = []
         tracks=[]
-        for i in range(1,5):
+        for i in range(1,31):
             print('RODADA:',i)
             a = abc_swarm.ABC(n,limite,cmax,dimensao,funcao,movimentacao)
             fitness,track = a.optimize()
@@ -18,8 +18,8 @@ def analysis():
         ax.boxplot(results)
         ax.yaxis.get_major_formatter().set_scientific(False)
         plt.tight_layout()
-        path = os.path.dirname(os.path.abspath(__file__))
-        path += "/boxplot"
+        path_root = os.path.dirname(os.path.abspath(__file__))
+        path = path_root + "/boxplot"
         if not os.path.exists(path):
             os.mkdir(path)
         path = path+'/'+dir_name
@@ -34,7 +34,12 @@ def analysis():
         plt.xlabel("Iterações")
         plt.ylabel("Melhor Fitness")
         name_figure = f'ABC {movimentacao}-{funcao}'
-        path += "/convergencia"
+        path = path_root + "/convergencia"
+        if not os.path.exists(path):
+            os.mkdir(path)
+        path = path+'/'+dir_name
+        if not os.path.exists(path):
+            os.mkdir(path)
         plt.savefig(path+'/'+name_figure+'.png')
         
 
@@ -50,9 +55,9 @@ def single():
 
 n = 100
 limite = 10
-cmax = 10
+cmax = 1000
 dimensao = 2
-funcao = 'esfera'
+funcao = 'rastrigin'  #rastrigin ackley rosenbrock esfera
 movimentacoes = ['tradicional','roleta','colmeia']
 movimentacao = 'tradicional'
 dir_name = 'atividade_3'
