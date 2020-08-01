@@ -52,17 +52,18 @@ def single():
     plt.xlabel("Iterações")
     plt.ylabel("Melhor Fitness")
     plt.show()
+    print(best)
 
-n = 100
-limite = 10
-cmax = 1000
-dimensao = 2
-funcao = 'rastrigin'  #rastrigin ackley rosenbrock esfera
+n = 20
+dimensao = 5
+limite = dimensao*(n/2)
+cmax = 1
+funcao = 'esfera'  #rastrigin ackley rosenbrock esfera
 movimentacoes = ['tradicional','roleta','colmeia']
 movimentacao = 'tradicional'
 dir_name = 'atividade_3'
 
-analysis()
-#single()
+#analysis()
+single()
 
 

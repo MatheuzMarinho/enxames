@@ -93,13 +93,20 @@ class ABC:
         # faz a soma dos fitness das abelhas exploradoras
         soma_fitness = 0
         for i in range(self.nf):
-            soma_fitness += self.exploradoras[i].fitness
+            if self.exploradoras[i].fitness >=0:
+              soma_fitness += 1/(1+self.exploradoras[i].fitness)
+            else:
+              soma_fitness += 1+abs(self.exploradoras[i].fitness)
         # cria a distribuição de probabilidades de acordo com o fitness calculado
         distribuicao_probabilidade = []
         for i in range(self.nf):
-            probabilidade_alocacao = self.exploradoras[i].fitness / soma_fitness
+            if self.exploradoras[i].fitness >=0:
+              probabilidade_alocacao = (1/(1+self.exploradoras[i].fitness)) / soma_fitness
+            else:
+              probabilidade_alocacao = (1+abs(self.exploradoras[i].fitness)) / soma_fitness
+            
             distribuicao_probabilidade.append(probabilidade_alocacao)
-        # posiciona as oportunitas de acordo com a atratividade das exploradoras
+        # posiciona as oportunitas de acordo com a atratividade das exploradoras        
         for abelha in abelhas:
             exploradora = choice(self.exploradoras, 1, p=distribuicao_probabilidade)[0]
             abelha.posicao = exploradora.posicao.copy()
