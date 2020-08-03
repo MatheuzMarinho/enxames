@@ -57,8 +57,8 @@ def single():
 n = 20
 dimensao = 5
 limite = dimensao*(n/2)
-cmax = 1
-funcao = 'esfera'  #rastrigin ackley rosenbrock esfera
+cmax = 2000
+funcao = 'rastrigin'  #rastrigin ackley rosenbrock esfera
 movimentacoes = ['tradicional','roleta','colmeia']
 movimentacao = 'tradicional'
 dir_name = 'atividade_3'

@@ -163,14 +163,19 @@ class ABC:
         abelha_candidata = self.mov_probabilidade_geral(abelha)
       elif self.movimentacao == 'colmeia':
         abelha_candidata = self.mov_dentro_colonia(abelha,trabalhadoras_colonia)
+      new_pos = []
       for i in range (self.dimensao):
-        abelha.posicao[i] = abelha.posicao[i] + random.uniform(-1, 1) * (abelha.posicao[i] - abelha_candidata.posicao[i])        
-        if abelha.posicao[i] < self.bound[0]:
-            abelha.posicao[i] = self.bound[0]
-        elif abelha.posicao[i] > self.bound[1]:
-            abelha.posicao[i] = self.bound[1]
+        new_pos_i = abelha.posicao[i] + random.uniform(-1, 1) * (abelha.posicao[i] - abelha_candidata.posicao[i])        
+        if new_pos_i < self.bound[0]:
+            new_pos_i = self.bound[0]
+        elif new_pos_i > self.bound[1]:
+            new_pos_i = self.bound[1]
+        new_pos.append(new_pos_i)
 
-      abelha.fitness = funcao_fitness(abelha.posicao,self.funcao)
+      new_fit = funcao_fitness(new_pos,self.funcao)
+      if new_fit < abelha.fitness:
+        abelha.fitness = new_fit
+        abelha.posicao = list(new_pos)
 
     def optimize(self):
         melhor_posicao = None
