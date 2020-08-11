@@ -63,7 +63,7 @@ def read_txt(problem_name):
 p = 0.2 #evaporate ratio
 alfa= 0.5 # importance of the pheromone
 beta = 0.8  #  importance of heuristic information
-iterations = 500
+iterations = 1000
 ant_count = 30
 
 # num_points = 3
